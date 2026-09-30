@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="465" height="218" preserveAspectRatio="xMinYMin meet" viewBox="0 0 465 218" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="465" height="218"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-218)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 48,36 L 435,36 Z" style="stroke: rgb(87%,89%,91%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="23.032" y="33.0" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,66) scale(1,-1)">0.01</text>
+			<path d="M 48,72.5 L 435,72.5 Z" style="stroke: rgb(87%,89%,91%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="27.88" y="69.5" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,139) scale(1,-1)">0.1</text>
+			<path d="M 48,109 L 435,109 Z" style="stroke: rgb(87%,89%,91%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="35.152" y="106.0" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,212) scale(1,-1)">1</text>
+			<path d="M 48,145.5 L 435,145.5 Z" style="stroke: rgb(87%,89%,91%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="30.304000000000002" y="142.5" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,285) scale(1,-1)">10</text>
+			<path d="M 48,182 L 435,182 Z" style="stroke: rgb(87%,89%,91%); stroke-linecap: butt; stroke-width: 0.5;"/>
+			<text x="25.456" y="179.0" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,358) scale(1,-1)">100</text>
+			<text x="37.092" y="21" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,42) scale(1,-1)">1,000</text>
+			<text x="133.842" y="21" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,42) scale(1,-1)">2,000</text>
+			<text x="230.592" y="21" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,42) scale(1,-1)">4,000</text>
+			<text x="327.342" y="21" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,42) scale(1,-1)">8,000</text>
+			<text x="421.668" y="21" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,42) scale(1,-1)">16,000</text>
+			<text x="2" y="199" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,398) scale(1,-1)">시간(ms), 로그 눈금</text>
+			<text x="194.308" y="2" style="font-family: KR; font-size: 8px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,4) scale(1,-1)">입력 크기 n (크기 2배 간격)</text>
+			<circle cx="48.0" cy="80.19004983484571" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(80%,42%,17%); fill-rule: evenodd;"/>
+			<circle cx="144.75" cy="87.55864214574494" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(80%,42%,17%); fill-rule: evenodd;"/>
+			<circle cx="241.5" cy="108.2472834184751" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(80%,42%,17%); fill-rule: evenodd;"/>
+			<circle cx="338.25" cy="130.11562513100148" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(80%,42%,17%); fill-rule: evenodd;"/>
+			<circle cx="435.0" cy="152.08251048831323" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(80%,42%,17%); fill-rule: evenodd;"/>
+			<polyline points="48 80.19005, 144.75 87.55864, 241.5 108.2473, 338.25 130.1156, 435 152.0825" style="stroke: rgb(80%,42%,17%); stroke-linecap: butt; stroke-width: 1.8; fill: None; fill-rule: evenodd;"/>
+			<path d="M 242,202 L 257,202 Z" style="stroke: rgb(80%,42%,17%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="261" y="198" style="font-family: KR; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,396) scale(1,-1)">삽입</text>
+			<circle cx="48.0" cy="55.25261056237471" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,48%,56%); fill-rule: evenodd;"/>
+			<circle cx="144.75" cy="56.872683719280715" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,48%,56%); fill-rule: evenodd;"/>
+			<circle cx="241.5" cy="69.11070238161463" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,48%,56%); fill-rule: evenodd;"/>
+			<circle cx="338.25" cy="81.77887098176484" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,48%,56%); fill-rule: evenodd;"/>
+			<circle cx="435.0" cy="94.72095815052296" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,48%,56%); fill-rule: evenodd;"/>
+			<polyline points="48 55.25261, 144.75 56.87268, 241.5 69.1107, 338.25 81.77887, 435 94.72096" style="stroke: rgb(6%,48%,56%); stroke-linecap: butt; stroke-width: 1.8; fill: None; fill-rule: evenodd;"/>
+			<path d="M 309,202 L 324,202 Z" style="stroke: rgb(6%,48%,56%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="328" y="198" style="font-family: KR; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,396) scale(1,-1)">병합</text>
+			<circle cx="48.0" cy="48.225898238995086" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(39%,31%,64%); fill-rule: evenodd;"/>
+			<circle cx="144.75" cy="49.11668024995474" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(39%,31%,64%); fill-rule: evenodd;"/>
+			<circle cx="241.5" cy="62.28581457431743" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(39%,31%,64%); fill-rule: evenodd;"/>
+			<circle cx="338.25" cy="75.85386406300779" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(39%,31%,64%); fill-rule: evenodd;"/>
+			<circle cx="435.0" cy="89.16428690741488" r="2.5" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(39%,31%,64%); fill-rule: evenodd;"/>
+			<polyline points="48 48.2259, 144.75 49.11668, 241.5 62.28581, 338.25 75.85386, 435 89.16429" style="stroke: rgb(39%,31%,64%); stroke-linecap: butt; stroke-width: 1.8; fill: None; fill-rule: evenodd;"/>
+			<path d="M 376,202 L 391,202 Z" style="stroke: rgb(39%,31%,64%); stroke-linecap: butt; stroke-width: 2;"/>
+			<text x="395" y="198" style="font-family: KR; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,396) scale(1,-1)">힙</text>
+		</g>
+	</g>
+</svg>

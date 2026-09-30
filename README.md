@@ -1,209 +1,101 @@
-# algorithm-env
+# 과제 1 - Compare Sorting (C17)
 
-2026-2 **고급알고리즘**(SIT2001-01)의 **실습 환경 template**입니다.
-컴파일러와 Python이 들어 있는 컨테이너, `src`/`tests` 뼈대, 그리고 그것이
-실제로 도는지 보여 주는 정렬 예제 하나가 들어 있습니다.
+- 이름 / 학번: 최재혁 / 2026193137
+- 저장소: https://github.com/JH0097/hw1-2026193137-
+- 비교 대상: 삽입 정렬, 병합 정렬, 힙 정렬
 
-- 강의 자료: [lec-algorithm.github.io/lecture](https://lec-algorithm.github.io/lecture/)
-- 강의 예제 코드: [lec-algorithm/algorithm-code](https://github.com/lec-algorithm/algorithm-code)
-- 시각화 자료: [lec-algorithm/algorithm-viz](https://github.com/lec-algorithm/algorithm-viz)
+정렬 구현, 입력 생성, 시간 측정, 비교·이동 계측, 정확성 테스트는 **모두 C**입니다.
+Python은 C 실행 파일을 호출하고 결과 CSV 요약·보고서를 만드는 보조 도구에만 사용합니다.
 
-## 언제 쓰나
+## 빠른 실행
 
-이 저장소는 **새 저장소의 출발점**입니다. 상단의 **Use this template**을 눌러
-자기 계정에 사본을 만들고 거기서 작업하세요.
-
-- **과제**를 낼 때
-- **개인프로젝트**를 시작할 때 (수업계획서상 GitHub 저장소 제출이 필수입니다)
-- 알고리즘 코드를 돌려 볼 환경이 필요할 때
-
-수업에서 다루는 예제 코드는 여기가 아니라 `algorithm-code`에 있습니다.
-그쪽은 매주 새 주제가 추가되므로, 복사하지 말고 저장소에서 바로 Codespace를
-만들거나 클론해서 `git pull`로 받으세요.
-
-## 준비물
-
-**GitHub 계정 하나면 됩니다.** 로컬에서 돌리려면 Git과 Docker가 필요합니다.
-컴파일러와 Python은 컨테이너 이미지 안에 들어 있어 따로 설치하지 않습니다.
-
-## 시작하기 (권장): Codespaces
-
-1. 이 저장소 상단의 **Use this template** → **Create a new repository**
-2. 저장소 이름을 정합니다 (예: `algorithms-hw1`, `my-algorithm-project`)
-3. 만들어진 **내 저장소**에서 **Code** → **Codespaces** 탭
-4. **Create codespace on main**
-
-잠시 기다리면 브라우저에 VS Code가 뜹니다. **그 터미널이 곧 컨테이너 안**이므로
-바로 아래 [돌려보기](#돌려보기)로 넘어가면 됩니다.
-
-## 로컬에서 하기
-
-위와 같이 **내 저장소를 먼저 만든 뒤** 그것을 클론합니다.
-
-```sh
-git clone https://github.com/<본인 계정>/<내 저장소>.git
-cd <내 저장소>
-docker compose up -d
-docker compose exec lab bash
-```
-
-처음 한 번은 이미지를 받느라 몇 분 걸립니다. 이후에는 몇 초면 뜹니다.
-**이후 모든 `docker compose` 명령은 이 폴더에서 칩니다.**
-
-VS Code를 쓴다면 Dev Containers 확장의 **Reopen in Container**를 골라도
-됩니다. Codespaces와 같은 설정을 씁니다.
-
-## 돌려보기
-
-컨테이너 안에서 `make` 한 단어면 됩니다.
-
-- 실행
-
-```sh
-make run
-```
-
-- 결과
-
-```console
-sorted: 1 2 3 4 5 6 7 8 9 10
-sorted: 1 2 3 4 5 6 7 8 9 10
-```
-
-C와 Python 두 구현이 같은 결과를 냅니다.
-
-## 테스트
-
-- 실행
+교수자 실습 템플릿의 Codespaces/Linux 환경에서 저장소 루트 터미널을 엽니다.
+C17 컴파일러(GCC 또는 Clang), make, Python 3이 필요합니다.
+정렬·테스트 및 CSV 요약에 외부 라이브러리는 필요하지 않습니다.
 
 ```sh
 make test
+make bench
 ```
 
-- 결과
+- `make test`: 계측용·시간용 두 빌드에서 정확성 검사
+- `make bench`: C 실행 파일 2개 실행 후 results/에 CSV 및 실행 환경 저장
+- `make run`: 시간 측정용 프로그램만 실행하고 CSV를 표준 출력으로 표시
+- `make sanitize`: 지원되는 GCC/Clang에서 AddressSanitizer/UBSan 검사
 
-```console
-ok    섞인 배열
-ok    이미 정렬된 배열
-ok    역순 배열
-ok    중복이 있는 배열
-ok    원소 하나
-ok    빈 배열
+본 결과는 macOS arm64에서 Zig 0.15.2의 Clang 기반 C 컴파일러로 실제 실행했습니다.
+Zig 언어로 작성된 정렬 코드는 없으며, 제출 코드는 GCC/Clang에서도 빌드할 수 있게 작성했습니다.
+GCC/Clang에서의 별도 실행 여부와 실제 측정 환경은 results/environment.json을 기준으로 확인하세요.
 
-6 checks, 0 failures
-...
-Ran 7 tests in 0.001s
-
-OK
-```
-
-테스트가 하나라도 실패하면 `make`가 0이 아닌 코드로 끝납니다. 과제를 내기
-전에 이 명령이 통과하는지 확인하세요.
-
-| 명령 | 하는 일 |
-| --- | --- |
-| `make run` | 예제 실행 (C · Python) |
-| `make test` | 유닛 테스트 (C · Python) |
-| `make run-c` · `make run-py` | 한쪽만 실행 |
-| `make test-c` · `make test-py` | 한쪽만 테스트 |
-| `make debug` | 디버그 심볼을 넣어 빌드 |
-| `make clean` | 빌드 산출물 정리 |
-
-## VS Code에서 실행·디버그
-
-Codespaces나 Dev Containers로 열었다면 편집기에서 바로 됩니다.
-
-| 하고 싶은 것 | 방법 |
-| --- | --- |
-| 파일 하나 실행 | 편집기 오른쪽 위 **▶ 버튼** (Code Runner) |
-| 전체 실행 | `Cmd/Ctrl + Shift + B` (기본 빌드 작업이 `make run`) |
-| 테스트 | 명령 팔레트 → **Tasks: Run Test Task** |
-| C 디버그 | `F5` → **C 디버그 (현재 파일)** |
-| Python 디버그 | `F5` → **Python 디버그 (현재 파일)** |
-
-`F5`를 누르면 빌드가 먼저 돌아 심볼이 있는 바이너리를 만들고 디버거가
-붙습니다. 중단점을 걸고 변수를 들여다볼 수 있습니다.
-
-### 파일 하나만 실행·디버그하기
-
-**C 디버그 (현재 파일)**은 열려 있는 `.c` 파일을 그대로 디버깅합니다. 폴더가
-늘어나도 구성을 새로 만들 필요가 없습니다.
-
-같은 폴더의 `.c`를 함께 링크하므로, 구현이 옆 파일에 있어도 됩니다. 대신
-**한 폴더에 `main`은 하나만** 두세요.
-
-터미널에서 직접 부를 수도 있습니다.
+## make 없이 C 컴파일하기
 
 ```sh
-make src/main.debug.out && ./src/main.debug.out
+mkdir -p build
+cc -Isrc -std=c17 -O2 -Wall -Wextra -Wpedantic tests/test_sort.c src/sort.c src/input.c -o build/test-plain.out
+cc -Isrc -std=c17 -O2 -Wall -Wextra -Wpedantic -DCOUNT_STATS tests/test_sort.c src/sort.c src/input.c -o build/test.out
+./build/test-plain.out
+./build/test.out
+cc -Isrc -std=c17 -O2 -Wall -Wextra -Wpedantic src/main.c src/sort.c src/input.c -o build/bench.out
+cc -Isrc -std=c17 -O2 -Wall -Wextra -Wpedantic -DCOUNT_STATS src/main.c src/sort.c src/input.c -o build/stats.out
+python3 tools/run_benchmark.py --compiler cc
 ```
 
-### ▶ 버튼에 대해
+정렬 자체는 표준 C를 사용하며, 시간 측정은 macOS/Linux에서 지원하는 POSIX clock_gettime을 사용합니다.
+Windows에서는 교수자 Codespaces나 WSL/Linux 환경을 이용하세요.
 
-편집기 오른쪽 위의 ▶ 버튼은 **Code Runner** 확장이 제공합니다. C든 Python이든
-열려 있는 파일을 그대로 실행합니다.
+## 파일 구성
 
-두 확장이 각각 ▶ 버튼을 내놓으면 헷갈리므로, C/C++ 확장 쪽은 꺼 두었습니다
-(`C_Cpp.debugShortcut`). 그쪽 버튼은 **파일 하나만** 컴파일해서 이런 오류를
-냅니다.
+- `src/sort.h`, `src/sort.c`: 공통 인터페이스와 세 정렬
+- `src/input.h`, `src/input.c`: 입력 생성, 정렬·원소 보존·안정성 검사
+- `src/main.c`: C 벤치마크, 예열·호출 순서 순환·배치 측정
+- `tests/test_sort.c`: qsort 대조, 경계값, 전수 검사, 안정성 반례, 계수 수식 검사
+- `tools/run_benchmark.py`: C 프로그램 호출, 결과 합치기, 중앙값·범위 요약
+- `results/timing.csv`: 525개 시간 측정 배치 원본 (각 배치 16회 정렬)
+- `results/counts.csv`: 별도 525회 C 연산 계측 원본
+- `results/raw.csv`: 동일 시드·결과 해시 검증 후 합친 525행
+- `results/summary.csv`: 75개 조건의 중앙값·최소·최대
+- `results/environment.json`: 컴파일러, 옵션, 운영체제, 실행 시각, C 소스 해시
+- `results/tests.txt`: 실제 테스트 실행 결과
+- `report/REPORT.pdf`, `report/REPORT.md`: 보고서 및 읽기용 원본
+- `report/AI_LEARNING.md`: 힙 정렬 AI 학습 자료
+- `report/student.json`: 이름·학번·저장소 URL
+- `tools/build_report.py`: 측정 결과로 PDF 및 Markdown 생성
+- `tools/fonts/`: Nanum Gothic 및 OFL 라이선스
 
-```console
-undefined reference to `bubbleSort'
-collect2: error: ld returned 1 exit status
-```
+## 측정 조건
 
-Code Runner도 기본 설정 그대로면 같은 문제가 나고, Python은 이미지에 없는
-`python`을 찾습니다. 그래서 `.vscode/settings.json`에서 두 가지를 고쳐
-두었습니다.
+- 크기: 1,000 / 2,000 / 4,000 / 8,000 / 16,000
+- 형태: 무작위 순열 / 오름차순 / 역순 / 0~15 중복 / n/100회 인접 교환
+- 고정 기본 시드: 20260930; xorshift32와 거절 샘플링 사용
+- 조건별 7회 배치, 각 배치에서 16개의 같은 입력 복사본을 정렬
+- 입력 생성·복사·검증은 측정 밖에서 수행; 총 시간을 16으로 나눠 정렬 1회 평균 계산
+- 7개 배치 평균의 중앙값을 보고; 모든 원본과 최소·최대 보존
+- 계측 코드는 C 전처리기로 시간용 빌드에서 제거하고 별도 빌드에서 실행
+- 이동: 코드상 Record 대입 횟수, 임시 저장 포함, 교환 3회
+- 추가 공간: 병합 보조 배열 할당 바이트와 이론적 공간 복잡도; 프로세스 RSS 실측 아님
 
-- C는 `Makefile`의 `%.out` 규칙을 거쳐 **같은 폴더의 `.c`를 함께** 빌드합니다
-- Python은 `python3`로 실행합니다
-- 출력 패널이 아니라 **터미널**에서 돌립니다. 그래야 `scanf`나 `input()`이 멈추지 않습니다
+## 보고서 다시 만들기
 
-## 저장소 구조
-
-```plaintext
-algorithm-env/
-├── .devcontainer/devcontainer.json  # Codespaces · Dev Containers 설정
-├── compose.yml                      # 실습 컨테이너 (서비스 이름: lab)
-├── Dockerfile                       # gcc · gdb · make · python3 · git
-├── .vscode/                         # 빌드·디버그 설정 (F5, Cmd+Shift+B)
-├── Makefile                         # run · test · debug · clean
-├── src/
-│   ├── sort.h · sort.c              # C 구현
-│   ├── main.c                       # C 실행 예제
-│   ├── sort.py                      # Python 구현
-│   └── main.py                      # Python 실행 예제
-└── tests/
-    ├── test_sort.c                  # C 유닛 테스트 (표준 C만 사용)
-    └── test_sort.py                 # Python 유닛 테스트 (unittest)
-```
-
-## 규약
-
-- **실행 파일은 `*.out`으로 만듭니다.** `.gitignore`가 `*.out`만 걸러내므로,
-  컨테이너에서 컴파일한 Linux 바이너리가 커밋에 섞이지 않습니다.
-- **외부 라이브러리를 쓰지 않습니다.** C는 표준 라이브러리만, Python은 표준
-  모듈만 씁니다. C 테스트도 프레임워크 없이 `assert` 수준으로 직접 씁니다.
-- **C와 Python은 같은 알고리즘을 같은 이름의 함수로 구현합니다.** 언어 차이가
-  알고리즘 차이로 보이지 않게 합니다.
-- 파일명은 각 언어의 관례를 따릅니다. C는 camelCase(`bubbleSort`), Python은
-  snake_case(`bubble_sort`)입니다.
-
-## 자기 코드로 바꾸기
-
-`src`의 버블 정렬은 환경이 도는지 보여 주는 예제일 뿐입니다. 지우고 자기
-코드를 넣으세요. `tests`도 마찬가지입니다. 뼈대(`Makefile`, `src`, `tests`,
-컨테이너 설정)만 남기면 됩니다.
-
-## 변경 기록
-
-버전과 변경 내역은 [CHANGELOG.md](CHANGELOG.md)에 있습니다.
-
-## 정리
+실험을 재실행하면 results/가 새 결과로 갱신됩니다. 보고서와 일치하도록 PDF도 다시 만들고,
+results/와 report/를 함께 커밋하세요.
 
 ```sh
-docker compose down
+python3 -m pip install -r tools/report-requirements.txt
+python3 tools/build_report.py
 ```
 
-컨테이너를 지워도 코드는 그대로 남습니다.
+PDF 생성에만 reportlab이 필요합니다. Python 보조 도구는 정렬 시간 구간에 포함되지 않습니다.
+문장 수정은 `tools/build_report.py`에서 합니다. REPORT.md를 직접 고쳐도 PDF에 자동 반영되지 않습니다.
+
+## 참고 및 AI 사용
+
+AI가 코드·검사·실험 실행·보고서·힙 정렬 학습 자료 작성을 보조했습니다.
+수치는 실제 C 프로그램 실행 결과이며, 학생이 직접 실행했다는 의미는 아닙니다.
+학습 자료는 AI가 작성한 설명형 문답입니다. 실제 대화 원문을 가장한 기록은 아닙니다.
+
+- 강의: https://github.com/lec-algorithm/lecture
+- 실습 코드: https://github.com/lec-algorithm/algorithm-code
+- 샘플: https://github.com/lec-algorithm/hw1-sample-2026
+- 실습 템플릿: https://github.com/lec-algorithm/algorithm-env
+- 정렬 비교표: https://en.wikipedia.org/wiki/Sorting_algorithm#Comparison_of_algorithms
+- 힙 정렬 이론: https://algs4.cs.princeton.edu/24pq/

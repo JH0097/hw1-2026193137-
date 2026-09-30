@@ -1,0 +1,42 @@
+{
+  "language": "C17 + POSIX clock_gettime",
+  "started": "2026-09-30T21:19:51.953555+09:00",
+  "finished": "2026-09-30T21:20:03.747643+09:00",
+  "system": "Darwin",
+  "release": "25.6.0",
+  "machine": "arm64",
+  "processor": "arm",
+  "compiler": "clang version 20.1.2 (https://github.com/ziglang/zig-bootstrap 7ef74e656cf8ddbd6bf891a8475892aa1afa6891)\nTarget: aarch64-unknown-darwin25.6.0\nThread model: posix\nInstalledDir: /Users/choijaehyeok/.codex/.chatgpt-projects/g-p-6a9dfac5e0448191bc689276f31f1157/tmp/sorting-reference/zig-aarch64-macos-0.15.2",
+  "compiler_command": "../../tmp/sorting-reference/zig-aarch64-macos-0.15.2/zig cc",
+  "flags": "-Isrc -std=c17 -O2 -Wall -Wextra -Wpedantic",
+  "stats_flag": "-DCOUNT_STATS",
+  "sizes": [
+    1000,
+    2000,
+    4000,
+    8000,
+    16000
+  ],
+  "patterns": [
+    "random",
+    "sorted",
+    "reverse",
+    "duplicates",
+    "nearly"
+  ],
+  "trials": 7,
+  "base_seed": 20260930,
+  "prng": "xorshift32 + rejection sampling; Fisher-Yates shuffle",
+  "batch": 16,
+  "timer": "clock_gettime(CLOCK_MONOTONIC), elapsed nanoseconds / batch / 1e6",
+  "record_bytes": 8,
+  "counter_policy": "two executables; timing counters removed by C preprocessor",
+  "source_sha256": {
+    "src/input.c": "d1a9d1590c7fd9b257fde512478d2c53edd341abb1568c9a59229ee7089d9bc7",
+    "src/input.h": "a26496656a2b7f99515991aa8a82ca24a6a240ebfdf27444567f8f44bd9e1263",
+    "src/main.c": "a2035f5e50414d7b3914c8572cad3c33c2112ce3f11872bbd2c636b1a8a3b976",
+    "src/sort.c": "1e51378735534c9189530cb55be8ce04a3e1e5e3c1a84ee4a6493d6bc77dbc1b",
+    "src/sort.h": "05e828ac14cf237ad9acc6a66ee0d8441cba54ad4aea353a163ccde463af9f37",
+    "tests/test_sort.c": "a907fef3cc2d9fcd65d17da29a6360c987d8b9dc3deb4f3451e4edb1b0bc9c61"
+  }
+}

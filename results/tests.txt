@@ -1,0 +1,11 @@
+C17 verification, macOS arm64, Zig 0.15.2 C compiler
+Flags: -Isrc -std=c17 -O2 -Wall -Wextra -Wpedantic
+
+Instrumented build (-DCOUNT_STATS):
+4571 input cases, 36583 checks, 0 failures
+
+Timing build (no COUNT_STATS):
+4571 input cases, 36576 checks, 0 failures
+
+UBSan build: -std=c17 -O1 -g -DCOUNT_STATS -fsanitize=undefined -fno-sanitize-recover=all
+4571 input cases, 36583 checks, 0 failures

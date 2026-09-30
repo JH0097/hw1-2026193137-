@@ -1,68 +1,55 @@
-/* 유닛 테스트 — 외부 프레임워크 없이 표준 C만 쓴다.
- * 실행: make test-c
- */
+#include "input.h"
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include "sort.h"
-
-static int checks = 0;
-static int failures = 0;
-
-static void printArray(const char *label, const int a[], int n) {
-    printf("      %s:", label);
-    for (int i = 0; i < n; i++) {
-        printf(" %d", a[i]);
-    }
-    printf("\n");
+static unsigned checks=0, cases=0;
+#define CHECK(x) do { ++checks; if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); exit(1); } } while(0)
+static int cmpInt(const void *a,const void *b) {
+    int x=*(const int *)a,y=*(const int *)b; return (x>y)-(x<y);
 }
-
-/* input을 정렬한 결과가 want와 같은지 본다. */
-static void expectSorted(const char *name, int input[], const int want[], int n) {
-    checks++;
-    bubbleSort(input, n);
-    if (n > 0 && memcmp(input, want, (size_t)n * sizeof(int)) != 0) {
-        failures++;
-        printf("FAIL  %s\n", name);
-        printArray("got ", input, n);
-        printArray("want", want, n);
-        return;
+static void checkCase(const Record *input,size_t n) {
+    Record a[300]; int expected[300]; ++cases;
+    for(size_t i=0;i<n;++i) expected[i]=input[i].key;
+    qsort(expected,n,sizeof(int),cmpInt);
+    for(int k=0;k<3;++k) {
+        memcpy(a,input,n*sizeof(*a)); SortStats s={0}; SORT_ALGORITHMS[k].sort(a,n,&s);
+        CHECK(validResult(a,input,n));
+        int equal=1; for(size_t i=0;i<n;++i) if(a[i].key!=expected[i]) equal=0;
+        CHECK(equal);
+        if(SORT_ALGORITHMS[k].stable) CHECK(isStable(a,n));
     }
-    printf("ok    %s\n", name);
 }
-
 int main(void) {
-    {
-        int a[] = {6, 8, 5, 9, 10, 1, 7, 2, 4, 3};
-        const int want[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        expectSorted("섞인 배열", a, want, 10);
+    Record a[300];
+    for(size_t n=0;n<=7;++n) {
+        size_t count=1; for(size_t i=0;i<n;++i) count*=3;
+        for(size_t code=0;code<count;++code) {
+            size_t v=code;
+            for(size_t i=0;i<n;++i) { a[i]=(Record){(int)(v%3)-1,(uint32_t)i}; v/=3; }
+            checkCase(a,n);
+        }
     }
-    {
-        int a[] = {1, 2, 3, 4, 5};
-        const int want[] = {1, 2, 3, 4, 5};
-        expectSorted("이미 정렬된 배열", a, want, 5);
+    for(size_t n=0;n<=257;++n) for(int p=0;p<5;++p) {
+        makeInput(a,n,p,1234567U+(uint32_t)n); checkCase(a,n);
     }
-    {
-        int a[] = {5, 4, 3, 2, 1};
-        const int want[] = {1, 2, 3, 4, 5};
-        expectSorted("역순 배열", a, want, 5);
-    }
-    {
-        int a[] = {3, 1, 3, 1, 2};
-        const int want[] = {1, 1, 2, 3, 3};
-        expectSorted("중복이 있는 배열", a, want, 5);
-    }
-    {
-        int a[] = {42};
-        const int want[] = {42};
-        expectSorted("원소 하나", a, want, 1);
-    }
-    {
-        /* n = 0이면 배열을 건드리지 않는다. 초기화해 두어야 경고가 없다. */
-        int a[1] = {0};
-        const int want[1] = {0};
-        expectSorted("빈 배열", a, want, 0);
-    }
-
-    printf("\n%d checks, %d failures\n", checks, failures);
-    return failures == 0 ? 0 : 1;
+    Record extremes[]={{INT_MAX,0},{INT_MIN,1},{0,2},{INT_MAX,3},{INT_MIN,4}};
+    checkCase(extremes,5);
+    for(int k=0;k<3;++k) { SortStats s={0}; SORT_ALGORITHMS[k].sort(NULL,0,&s); CHECK(s.comparisons==0); }
+    Record unstable[]={{2,0},{2,1},{1,2}}; SortStats s={0}; heapSort(unstable,3,&s);
+    CHECK(!isStable(unstable,3)); CHECK(unstable[0].tag==2 && unstable[1].tag==1 && unstable[2].tag==0);
+    Record original[]={{1,0},{2,1}}, corrupt[]={{1,0},{1,0}};
+    CHECK(!validResult(corrupt,original,2));
+    corrupt[0]=(Record){9,0}; corrupt[1]=(Record){10,1}; CHECK(!validResult(corrupt,original,2));
+    corrupt[0]=(Record){1,99}; CHECK(!validResult(corrupt,original,2));
+#ifdef COUNT_STATS
+    makeInput(a,100,1,1); s=(SortStats){0}; insertionSort(a,100,&s);
+    CHECK(s.comparisons==99); CHECK(s.moves==198);
+    makeInput(a,100,2,1); s=(SortStats){0}; insertionSort(a,100,&s);
+    CHECK(s.comparisons==4950); CHECK(s.moves==5148);
+    makeInput(a,17,0,1); s=(SortStats){0}; mergeSort(a,17,&s);
+    CHECK(s.buffer_bytes==17*sizeof(Record));
+    for(size_t n=0;n<2;++n) { s=(SortStats){0}; mergeSort(a,n,&s); CHECK(s.buffer_bytes==0); }
+#endif
+    printf("%u input cases, %u checks, 0 failures\n",cases,checks); return 0;
 }

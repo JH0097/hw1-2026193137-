@@ -1,8 +1,14 @@
-/* 버블 정렬 — 이 저장소가 도는지 확인하는 예제이자, 새 프로젝트의 출발점. */
 #ifndef SORT_H
 #define SORT_H
-
-/* a[0..n-1]을 제자리에서 오름차순으로 정렬한다. */
-void bubbleSort(int a[], int n);
-
-#endif /* SORT_H */
+#include <stddef.h>
+#include <stdint.h>
+/* tag identifies the original position; only key participates in comparisons. */
+typedef struct { int key; uint32_t tag; } Record;
+typedef struct { uint64_t comparisons, moves; size_t buffer_bytes; } SortStats;
+typedef void (*SortFn)(Record *, size_t, SortStats *);
+typedef struct { const char *name; SortFn sort; int stable; } SortAlgorithm;
+extern const SortAlgorithm SORT_ALGORITHMS[3];
+void insertionSort(Record *a, size_t n, SortStats *stats);
+void mergeSort(Record *a, size_t n, SortStats *stats);
+void heapSort(Record *a, size_t n, SortStats *stats);
+#endif
